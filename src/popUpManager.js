@@ -1,7 +1,4 @@
-import { format, compareAsc } from "date-fns";
 import { addToDoItem } from "./handleToDos";
-
-format(new Date(2014, 1, 11), "MM/dd/yyyy");
 
 function createPopUp() {
   const content = document.getElementById("content");
@@ -76,7 +73,10 @@ function populatePopUp(type) {
       const closeButton = document.createElement("button");
       closeButton.textContent = "X";
       closeButton.id = "close-button";
-      closeButton.addEventListener("click", removePopUp);
+      closeButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        removePopUp();
+      });
       formElement.appendChild(closeButton);
 
       const submitButton = document.createElement("button");

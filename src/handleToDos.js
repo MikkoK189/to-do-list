@@ -1,3 +1,5 @@
+import { clearToDos, displayToDoItem } from "./displayToDos";
+
 const toDoArray = [];
 
 function ToDoItem(title, description, dueDate, priority, notes, checklist) {
@@ -22,6 +24,10 @@ function addToDoItem(event) {
     return parseInt(a.priority) - parseInt(b.priority);
   });
   console.log(toDoArray);
+  clearToDos();
+  for (let i = 0; i < toDoArray.length; i++) {
+    displayToDoItem(toDoArray[i], i);
+  }
   event.target.reset();
 }
 
