@@ -38,3 +38,31 @@ header {
 header button {
   align-self: flex-end;
 }
+
+#background {
+  background-color: rgba(100, 100, 100, 0.6);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+}
+
+#popup-container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+#popup {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding: 3rem;
+  height: 15em;
+  width: 15em;
+  border-radius: 25px;
+  background-color: aliceblue;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.589);
+  z-index: 2;
+}
