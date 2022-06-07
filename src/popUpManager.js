@@ -1,4 +1,5 @@
 import { format, compareAsc } from "date-fns";
+import { addToDoItem } from "./handleToDos";
 
 format(new Date(2014, 1, 11), "MM/dd/yyyy");
 
@@ -63,6 +64,30 @@ function populatePopUp(type) {
       dateInput.id = "date";
       formElement.appendChild(dateInput);
 
+      const priorityLabel = document.createElement("label");
+      priorityLabel.htmlFor = "priority";
+      priorityLabel.textContent = "Priority";
+      formElement.appendChild(priorityLabel);
+      const priorityInput = document.createElement("input");
+      priorityInput.type = "number";
+      priorityInput.id = "priority";
+      formElement.appendChild(priorityInput);
+
+      const closeButton = document.createElement("button");
+      closeButton.textContent = "X";
+      closeButton.id = "close-button";
+      closeButton.addEventListener("click", removePopUp);
+      formElement.appendChild(closeButton);
+
+      const submitButton = document.createElement("button");
+      submitButton.textContent = "Submit";
+      submitButton.id = "submit-button";
+      formElement.appendChild(submitButton);
+
+      formElement.addEventListener("submit", (event) => {
+        event.preventDefault();
+        addToDoItem(event);
+      });
       break;
     case "projectList":
       break;
