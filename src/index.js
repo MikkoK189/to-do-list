@@ -1,8 +1,5 @@
 import "./style.css";
-import createBase from "./createBaseHTML.js";
 import { createPopUp, populatePopUp } from "./popUpManager";
-
-createBase();
 
 const newButton = document.getElementById("new-button");
 newButton.addEventListener("click", function () {
