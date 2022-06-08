@@ -42,7 +42,6 @@ function sortToDos() {
   });
   clearToDos();
   for (let i = 0; i < currentProject.toDoArray.length; i++) {
-    console.log(currentProject.toDoArray[i]);
     displayToDoItem(currentProject.toDoArray[i], i);
   }
   saveItems();
