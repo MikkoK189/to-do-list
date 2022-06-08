@@ -1,5 +1,5 @@
 import { clearToDos, displayToDoItem } from "./displayToDos";
-import { getCurrentProject } from "./projects";
+import { getCurrentProject, saveItems } from "./projects";
 
 function ToDoItem(title, description, dueDate, priority, notes, checklist) {
   this.title = title;
@@ -42,8 +42,10 @@ function sortToDos() {
   });
   clearToDos();
   for (let i = 0; i < currentProject.toDoArray.length; i++) {
+    console.log(currentProject.toDoArray[i]);
     displayToDoItem(currentProject.toDoArray[i], i);
   }
+  saveItems();
 }
 
-export { addToDoItem, getToDoItem, removeToDoItem };
+export { addToDoItem, getToDoItem, removeToDoItem, sortToDos };

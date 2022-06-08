@@ -1,6 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
 * {
   padding: 0;
   margin: 0;
+  font-family: "Rubik", sans-serif;
 }
 
 html,
@@ -10,7 +13,7 @@ body {
 
 #content {
   min-height: 100vh;
-  background-color: aqua;
+  background-color: #bae6fd;
   display: grid;
   grid-template-rows: 1fr 8fr;
 }
@@ -20,9 +23,13 @@ header {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: aquamarine;
+  background-color: #0ea5e9;
+  box-shadow: 2px 2px 2px 2px #036aa1bd;
   text-align: center;
   padding: 2rem;
+  z-index: 0;
+  font-weight: bold;
+  font-size: 24px;
 }
 
 #todos-container {
@@ -31,8 +38,8 @@ header {
   justify-content: baseline;
   align-items: center;
   padding: 2rem;
-  gap: 0.1rem;
-  background-color: bisque;
+  gap: 0.5rem;
+  background-color: #bae6fd;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   grid-template-rows: repeat(auto-fit, minmax(250px, 1fr));
 }
@@ -42,16 +49,45 @@ header {
   gap: 1em;
 }
 
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: #38bdf8;
+  border-radius: 4px;
+  width: auto;
+  height: 1rem;
+  padding: 1rem;
+  text-align: center;
+  border-style: none;
+  transition: all 320ms ease-in-out;
+}
+
+button:hover {
+  background-color: #7dd3fc;
+}
+
 .todo-card {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 1em;
   min-width: 80vw;
-  min-height: 1em;
-  max-height: 15em;
-  background-color: aliceblue;
+  height: 1em;
+  background-color: #38bdf8;
+  box-shadow: 2px 2px 2px 2px #0284c7;
+  border-radius: 5px;
   text-align: center;
+  transition: all 320ms ease-in-out;
+}
+
+.todo-card:hover {
+  margin-left: 1em;
+}
+
+.todo-card h1 {
+  font-size: 18px;
 }
 
 #popup p {
@@ -68,6 +104,7 @@ header button {
   width: 100%;
   height: 100%;
   position: fixed;
+  z-index: 2;
 }
 
 #popup-container {
@@ -89,10 +126,10 @@ header button {
   padding-top: 1rem;
   width: 15em;
   border-radius: 25px;
-  background-color: aliceblue;
+  background-color: #f0f9ff;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.589);
-  z-index: 2;
-  gap: 4px;
+  z-index: 5;
+  gap: 0.5rem;
 }
 
 #popup h1 {
@@ -103,7 +140,8 @@ header button {
   padding: 0.2rem;
   padding-left: 1rem;
   padding-right: 1rem;
-  background-color: aquamarine;
+  background-color: #38bdf8;
+  box-shadow: 2px 2px 2px 2px #0284c7;
   border-radius: 5px;
   width: 90%;
   transition: all 320ms ease-in-out;
@@ -111,12 +149,12 @@ header button {
 
 .project-card.selected {
   margin-left: 0.5em;
-  background-color: aqua;
+  background-color: #7dd3fc;
 }
 
 .project-card:hover {
   margin-left: 0.5em;
-  background-color: chartreuse;
+  background-color: #0369a1;
 }
 
 #popup form {
@@ -137,5 +175,5 @@ header button {
 
 #submit-button {
   width: 5rem;
-  padding: 0.3rem;
+  padding: 0.5rem;
 }

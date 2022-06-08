@@ -1,4 +1,9 @@
-import { addToDoItem, getToDoItem } from "./handleToDos";
+import {
+  addToDoItem,
+  getToDoItem,
+  removeToDoItem,
+  sortToDos,
+} from "./handleToDos";
 import {
   createProject,
   getCurrentProject,
@@ -47,6 +52,7 @@ function populatePopUp(type, id) {
       const titleInput = document.createElement("input");
       titleInput.type = "text";
       titleInput.id = "title";
+      titleInput.setAttribute("required", 1);
       formElement.appendChild(titleInput);
 
       const descriptionLabel = document.createElement("label");
@@ -56,6 +62,7 @@ function populatePopUp(type, id) {
       const descriptionInput = document.createElement("input");
       descriptionInput.type = "text";
       descriptionInput.id = "description";
+      descriptionInput.setAttribute("required", 1);
       formElement.appendChild(descriptionInput);
 
       const dateLabel = document.createElement("label");
@@ -65,6 +72,7 @@ function populatePopUp(type, id) {
       const dateInput = document.createElement("input");
       dateInput.type = "date";
       dateInput.id = "date";
+      dateInput.setAttribute("required", 1);
       formElement.appendChild(dateInput);
 
       const priorityLabel = document.createElement("label");
@@ -74,6 +82,7 @@ function populatePopUp(type, id) {
       const priorityInput = document.createElement("input");
       priorityInput.type = "number";
       priorityInput.id = "priority";
+      priorityInput.setAttribute("required", 1);
       formElement.appendChild(priorityInput);
 
       const closeButton = document.createElement("button");
@@ -136,10 +145,15 @@ function populatePopUp(type, id) {
       popUpContainer.appendChild(descriptionElement);
       const doneButton = document.createElement("button");
       doneButton.textContent = "Done";
+      doneButton.addEventListener("click", () => {
+        removeToDoItem(id);
+        sortToDos();
+        removePopUp();
+      });
       popUpContainer.appendChild(doneButton);
-      const removeButton = document.createElement("button");
-      removeButton.textContent = "Remove";
-      popUpContainer.appendChild(removeButton);
+      // const removeButton = document.createElement("button");
+      // removeButton.textContent = "Remove";
+      // popUpContainer.appendChild(removeButton);
       break;
     default:
       break;

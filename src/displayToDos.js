@@ -3,7 +3,6 @@ import { createPopUp, populatePopUp } from "./popUpManager";
 format(new Date(2014, 1, 11), "MM/dd/yyyy");
 
 function displayToDoItem(toDoItem, id) {
-  console.log(toDoItem);
   const itemContainer = document.getElementById("todos-container");
 
   const toDoCard = document.createElement("div");
@@ -20,7 +19,7 @@ function displayToDoItem(toDoItem, id) {
 
   const dateElement = document.createElement("div");
   const dateArray = toDoItem.dueDate.split("-");
-  console.log(dateArray);
+
   dateElement.textContent = format(
     new Date(dateArray[0], dateArray[1], dateArray[2]),
     "dd.MM.yy"
