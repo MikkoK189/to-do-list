@@ -1,6 +1,5 @@
 import { clearToDos, displayToDoItem } from "./displayToDos";
-
-const toDoArray = [];
+import { getCurrentProject } from "./projects";
 
 function ToDoItem(title, description, dueDate, priority, notes, checklist) {
   this.title = title;
@@ -12,6 +11,7 @@ function ToDoItem(title, description, dueDate, priority, notes, checklist) {
 }
 
 function addToDoItem(event) {
+  const currentProject = getCurrentProject();
   let elements = event.target.elements;
   const toDo = new ToDoItem(
     elements["title"].value,
@@ -19,16 +19,31 @@ function addToDoItem(event) {
     elements["date"].value,
     elements["priority"].value
   );
-  toDoArray.push(toDo);
-  toDoArray.sort(function comparePriority(a, b) {
-    return parseInt(a.priority) - parseInt(b.priority);
-  });
-  console.log(toDoArray);
-  clearToDos();
-  for (let i = 0; i < toDoArray.length; i++) {
-    displayToDoItem(toDoArray[i], i);
-  }
+  currentProject.toDoArray.push(toDo);
+  sortToDos();
   event.target.reset();
 }
 
-export { addToDoItem };
+function getToDoItem(index) {
+  const currentProject = getCurrentProject();
+  return currentProject.toDoArray[index];
+}
+
+function removeToDoItem(index) {
+  const currentProject = getCurrentProject();
+  currentProject.toDoArray.splice(index, 1);
+  sortToDos();
+}
+
+function sortToDos() {
+  const currentProject = getCurrentProject();
+  currentProject.toDoArray.sort(function comparePriority(a, b) {
+    return parseInt(a.priority) - parseInt(b.priority);
+  });
+  clearToDos();
+  for (let i = 0; i < currentProject.toDoArray.length; i++) {
+    displayToDoItem(currentProject.toDoArray[i], i);
+  }
+}
+
+export { addToDoItem, getToDoItem, removeToDoItem };

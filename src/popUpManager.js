@@ -1,4 +1,10 @@
-import { addToDoItem } from "./handleToDos";
+import { addToDoItem, getToDoItem } from "./handleToDos";
+import {
+  createProject,
+  getCurrentProject,
+  getProjectList,
+  setCurrentProject,
+} from "./projects";
 
 function createPopUp() {
   const content = document.getElementById("content");
@@ -27,7 +33,7 @@ function removePopUp() {
   document.getElementById("content").removeChild(popUpContent);
 }
 
-function populatePopUp(type) {
+function populatePopUp(type, id) {
   const popUpContainer = document.getElementById("popup");
   switch (type) {
     case "form":
@@ -90,6 +96,50 @@ function populatePopUp(type) {
       });
       break;
     case "projectList":
+      const projectList = getProjectList();
+      const currentProject = getCurrentProject();
+      projectList.forEach((project) => {
+        const projectCard = document.createElement("div");
+        projectCard.classList.add("project-card");
+        const titleElement = document.createElement("h1");
+        titleElement.textContent = project.title;
+        projectCard.appendChild(titleElement);
+        projectCard.addEventListener("click", (event) => {
+          console.log("WAT");
+          setCurrentProject(project);
+          removePopUp();
+        });
+        popUpContainer.appendChild(projectCard);
+        if (project == currentProject) {
+          projectCard.classList.add("selected");
+        }
+      });
+      const newProjectbutton = document.createElement("button");
+      newProjectbutton.textContent = "New";
+      popUpContainer.appendChild(newProjectbutton);
+      newProjectbutton.addEventListener("click", () => {
+        let title = prompt("Enter new project title");
+        if (title == null || title == "") {
+          return;
+        } else {
+          createProject(title);
+          removePopUp();
+        }
+      });
+      break;
+    case "todo":
+      const titleElement = document.createElement("h1");
+      titleElement.textContent = getToDoItem(id).title;
+      popUpContainer.appendChild(titleElement);
+      const descriptionElement = document.createElement("p");
+      descriptionElement.textContent = getToDoItem(id).description;
+      popUpContainer.appendChild(descriptionElement);
+      const doneButton = document.createElement("button");
+      doneButton.textContent = "Done";
+      popUpContainer.appendChild(doneButton);
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove";
+      popUpContainer.appendChild(removeButton);
       break;
     default:
       break;

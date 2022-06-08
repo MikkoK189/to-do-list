@@ -1,20 +1,22 @@
 import { format, compareAsc } from "date-fns";
+import { createPopUp, populatePopUp } from "./popUpManager";
 format(new Date(2014, 1, 11), "MM/dd/yyyy");
 
 function displayToDoItem(toDoItem, id) {
-  const itemContainer = document.getElementById("grid-container");
+  console.log(toDoItem);
+  const itemContainer = document.getElementById("todos-container");
 
   const toDoCard = document.createElement("div");
   toDoCard.classList.add("todo-card");
   toDoCard.id = id;
+  toDoCard.addEventListener("click", function (event) {
+    createPopUp();
+    populatePopUp("todo", event.target.id);
+  });
 
   const titleElement = document.createElement("h1");
   titleElement.textContent = toDoItem.title;
   toDoCard.appendChild(titleElement);
-
-  const descriptionElement = document.createElement("p");
-  descriptionElement.textContent = toDoItem.description;
-  toDoCard.appendChild(descriptionElement);
 
   const dateElement = document.createElement("div");
   const dateArray = toDoItem.dueDate.split("-");
@@ -29,7 +31,7 @@ function displayToDoItem(toDoItem, id) {
 }
 
 function clearToDos() {
-  const gridContent = document.getElementById("grid-container");
+  const gridContent = document.getElementById("todos-container");
 
   while (gridContent.firstChild) {
     gridContent.removeChild(gridContent.lastChild);
