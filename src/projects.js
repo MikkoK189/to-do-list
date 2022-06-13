@@ -10,10 +10,6 @@ function Project(title) {
   this.toDoArray = [];
 }
 
-Project.prototype.populateToDos = function (todos) {
-  console.log("Not yet implemented");
-};
-
 function getCurrentProject() {
   return currentProject;
 }
@@ -27,8 +23,10 @@ function removeProject(project) {
   projectsArray.splice(index, 1);
   if (projectsArray[0]) {
     currentProject = projectsArray[0];
+    setProjectTitle(currentProject.title);
   } else {
     currentProject = null;
+    setProjectTitle("Create A Project");
   }
   saveItems();
 }
