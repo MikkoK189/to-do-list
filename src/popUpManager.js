@@ -92,6 +92,7 @@ function populatePopUp(type, id) {
         event.preventDefault();
         removePopUp();
       });
+
       formElement.appendChild(closeButton);
 
       const submitButton = document.createElement("button");
@@ -114,7 +115,6 @@ function populatePopUp(type, id) {
         titleElement.textContent = project.title;
         projectCard.appendChild(titleElement);
         projectCard.addEventListener("click", (event) => {
-          console.log("WAT");
           setCurrentProject(project);
           removePopUp();
         });

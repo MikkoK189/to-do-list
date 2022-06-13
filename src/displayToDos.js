@@ -34,6 +34,11 @@ function displayToDoItem(toDoItem, id) {
 
   const titleElement = document.createElement("h1");
   titleElement.textContent = toDoItem.title;
+  if (toDoItem.title.length > 15) {
+    let newTitle = toDoItem.title.slice(0, 14);
+    newTitle += "...";
+    titleElement.textContent = newTitle;
+  }
   leftSideContainer.appendChild(titleElement);
   toDoCard.appendChild(leftSideContainer);
 
