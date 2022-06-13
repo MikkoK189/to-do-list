@@ -8,8 +8,11 @@ import {
   createProject,
   getCurrentProject,
   getProjectList,
+  removeProject,
   setCurrentProject,
 } from "./projects";
+
+import Trash from "./images/trashcan.svg";
 
 function createPopUp() {
   const content = document.getElementById("content");
@@ -115,9 +118,18 @@ function populatePopUp(type, id) {
         titleElement.textContent = project.title;
         projectCard.appendChild(titleElement);
         projectCard.addEventListener("click", (event) => {
-          setCurrentProject(project);
+          if (event.target.classList.contains("project-card")) {
+            setCurrentProject(project);
+            removePopUp();
+          }
+        });
+        const removeButton = document.createElement("img");
+        removeButton.src = Trash;
+        removeButton.addEventListener("click", (event) => {
+          removeProject(project);
           removePopUp();
         });
+        projectCard.appendChild(removeButton);
         popUpContainer.appendChild(projectCard);
         if (project == currentProject) {
           projectCard.classList.add("selected");
@@ -127,8 +139,10 @@ function populatePopUp(type, id) {
       newProjectbutton.textContent = "New";
       popUpContainer.appendChild(newProjectbutton);
       newProjectbutton.addEventListener("click", () => {
-        let title = prompt("Enter new project title");
-        if (title == null || title == "") {
+        let title = prompt(
+          "Enter new project title, please keep it under 40 characters"
+        );
+        if (title == null || title == "" || title.length > 40) {
           return;
         } else {
           createProject(title);

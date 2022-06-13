@@ -139,6 +139,9 @@ header button {
 }
 
 .project-card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 0.2rem;
   padding-left: 1rem;
   padding-right: 1rem;

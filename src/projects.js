@@ -1,3 +1,4 @@
+import { setProjectTitle } from ".";
 import { sortToDos } from "./handleToDos";
 
 const projectsArray = [];
@@ -21,6 +22,17 @@ function getProjectList() {
   return projectsArray;
 }
 
+function removeProject(project) {
+  const index = projectsArray.indexOf(project);
+  projectsArray.splice(index, 1);
+  if (projectsArray[0]) {
+    currentProject = projectsArray[0];
+  } else {
+    currentProject = null;
+  }
+  saveItems();
+}
+
 function createProject(title) {
   const newProject = new Project(title);
   projectsArray.push(newProject);
@@ -30,6 +42,7 @@ function createProject(title) {
 
 function setCurrentProject(project) {
   currentProject = project;
+  setProjectTitle(currentProject.title);
   sortToDos();
 }
 
@@ -75,8 +88,14 @@ function loadItems() {
     code.forEach((element) => {
       projectsArray.push(element);
     });
-
-    currentProject = projectsArray[0];
+    if (projectsArray[0]) {
+      currentProject = projectsArray[0];
+      setProjectTitle(currentProject.title);
+    } else {
+      createProject("Default");
+      currentProject = projectsArray[0];
+      setProjectTitle(currentProject.title);
+    }
   } else {
     currentProject = new Project("Default");
     projectsArray.push(currentProject);
@@ -92,4 +111,5 @@ export {
   createProject,
   saveItems,
   loadItems,
+  removeProject,
 };
