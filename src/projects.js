@@ -1,4 +1,5 @@
 import { setProjectTitle } from ".";
+import { clearToDos } from "./displayToDos";
 import { sortToDos } from "./handleToDos";
 
 const projectsArray = [];
@@ -24,9 +25,11 @@ function removeProject(project) {
   if (projectsArray[0]) {
     currentProject = projectsArray[0];
     setProjectTitle(currentProject.title);
+    sortToDos();
   } else {
     currentProject = null;
     setProjectTitle("Create A Project");
+    clearToDos();
   }
   saveItems();
 }
