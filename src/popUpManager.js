@@ -116,8 +116,8 @@ function populatePopUp(type, id) {
         projectCard.classList.add("project-card");
         const titleElement = document.createElement("h1");
         let titleToSet = project.title;
-        if (project.title.length > 40) {
-          titleToSet = project.title.slice(0, 39);
+        if (project.title.length > 20) {
+          titleToSet = project.title.slice(0, 19);
           titleToSet += "...";
         }
         titleElement.textContent = titleToSet;

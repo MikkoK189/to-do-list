@@ -37,6 +37,7 @@ function createProject(title) {
   const newProject = new Project(title);
   projectsArray.push(newProject);
   currentProject = newProject;
+  setProjectTitle(currentProject.title);
   saveItems();
 }
 
