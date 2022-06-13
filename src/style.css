@@ -85,7 +85,7 @@ button:hover {
 }
 
 .todo-card:hover {
-  margin-left: 1em;
+  background-color: #7dd3fc;
 }
 
 .todo-card h1 {
@@ -179,4 +179,21 @@ header button {
 #submit-button {
   width: 5rem;
   padding: 0.5rem;
+}
+
+#left-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+}
+
+#checkbox {
+  border: none;
+}
+
+.completed {
+  background-color: #0c4a6e;
+  box-shadow: 2px 2px 2px 2px #0369a1;
 }

@@ -1,4 +1,5 @@
 import { format, compareAsc } from "date-fns";
+import { markAsDone } from "./handleToDos";
 import { createPopUp, populatePopUp } from "./popUpManager";
 format(new Date(2014, 1, 11), "MM/dd/yyyy");
 
@@ -9,13 +10,32 @@ function displayToDoItem(toDoItem, id) {
   toDoCard.classList.add("todo-card");
   toDoCard.id = id;
   toDoCard.addEventListener("click", function (event) {
-    createPopUp();
-    populatePopUp("todo", event.target.id);
+    if (event.target.classList.contains("todo-card")) {
+      createPopUp();
+      populatePopUp("todo", event.target.id);
+    }
   });
+  const leftSideContainer = document.createElement("div");
+  leftSideContainer.id = "left-container";
+
+  const checkBoxElement = document.createElement("input");
+  checkBoxElement.type = "checkbox";
+  checkBoxElement.classList.add("checkbox");
+  checkBoxElement.id = id;
+  checkBoxElement.checked = toDoItem.done;
+  if (checkBoxElement.checked) {
+    toDoCard.classList.add("completed");
+  }
+  checkBoxElement.addEventListener("click", function (event) {
+    document.getElementById(`${event.target.id}`).classList.toggle("completed");
+    markAsDone(event.target.id, checkBoxElement.checked);
+  });
+  leftSideContainer.appendChild(checkBoxElement);
 
   const titleElement = document.createElement("h1");
   titleElement.textContent = toDoItem.title;
-  toDoCard.appendChild(titleElement);
+  leftSideContainer.appendChild(titleElement);
+  toDoCard.appendChild(leftSideContainer);
 
   const dateElement = document.createElement("div");
   const dateArray = toDoItem.dueDate.split("-");

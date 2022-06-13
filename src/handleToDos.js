@@ -1,13 +1,22 @@
 import { clearToDos, displayToDoItem } from "./displayToDos";
 import { getCurrentProject, saveItems } from "./projects";
 
-function ToDoItem(title, description, dueDate, priority, notes, checklist) {
+function ToDoItem(
+  title,
+  description,
+  dueDate,
+  priority,
+  notes,
+  checklist,
+  done
+) {
   this.title = title;
   this.description = description;
   this.dueDate = dueDate;
   this.priority = priority;
   this.notes = notes;
   this.checklist = checklist;
+  this.done = false;
 }
 
 function addToDoItem(event) {
@@ -22,6 +31,12 @@ function addToDoItem(event) {
   currentProject.toDoArray.push(toDo);
   sortToDos();
   event.target.reset();
+}
+
+function markAsDone(index, value) {
+  const currentProject = getCurrentProject();
+  currentProject.toDoArray[index].done = value;
+  sortToDos();
 }
 
 function getToDoItem(index) {
@@ -47,4 +62,4 @@ function sortToDos() {
   saveItems();
 }
 
-export { addToDoItem, getToDoItem, removeToDoItem, sortToDos };
+export { addToDoItem, getToDoItem, removeToDoItem, sortToDos, markAsDone };

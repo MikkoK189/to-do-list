@@ -144,7 +144,7 @@ function populatePopUp(type, id) {
       descriptionElement.textContent = getToDoItem(id).description;
       popUpContainer.appendChild(descriptionElement);
       const doneButton = document.createElement("button");
-      doneButton.textContent = "Mark as done";
+      doneButton.textContent = "Remove";
       doneButton.addEventListener("click", () => {
         removeToDoItem(id);
         sortToDos();
