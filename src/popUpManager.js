@@ -115,7 +115,12 @@ function populatePopUp(type, id) {
         const projectCard = document.createElement("div");
         projectCard.classList.add("project-card");
         const titleElement = document.createElement("h1");
-        titleElement.textContent = project.title;
+        let titleToSet = project.title;
+        if (project.title.length > 40) {
+          titleToSet = project.title.slice(0, 39);
+          titleToSet += "...";
+        }
+        titleElement.textContent = titleToSet;
         projectCard.appendChild(titleElement);
         projectCard.addEventListener("click", (event) => {
           if (event.target.classList.contains("project-card")) {

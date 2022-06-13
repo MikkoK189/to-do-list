@@ -21,6 +21,10 @@ function ToDoItem(
 
 function addToDoItem(event) {
   const currentProject = getCurrentProject();
+  if (!currentProject) {
+    alert("Create a project first!");
+    return;
+  }
   let elements = event.target.elements;
   const toDo = new ToDoItem(
     elements["title"].value,
